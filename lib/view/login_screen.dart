@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../constants/form_validator.dart';
+import 'signup_screen.dart';
+import 'dashboard.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -8,15 +12,29 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final FormValidation validation = Get.put(FormValidation());
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  @override
+  dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
-    final double height= MediaQuery.of(context).size.height;
+    final double height = MediaQuery.of(context).size.height;
 
-    return  Scaffold(
+    return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(top: height*0.2),
+          padding: EdgeInsets.only(top: height * 0.2),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -24,20 +42,37 @@ class _LoginScreenState extends State<LoginScreen> {
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Login', style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Color(0xff2D2D2D)),),
-                    Text('.', style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.red),),
+                    Text(
+                      'Login',
+                      style: TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xff2D2D2D)),
+                    ),
+                    Text(
+                      '.',
+                      style: TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red),
+                    ),
                   ],
                 ),
-                const Text('Welcome back!', style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),),
-                SizedBox(height: height*0.05,),
-
+                const Text(
+                  'Welcome back!',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+                ),
+                SizedBox(height: height * 0.05),
                 Center(
                   child: Form(
+                    key: formKey,
                     child: Column(
                       children: [
                         SizedBox(
-                          width: width*0.9,
+                          width: width * 0.9,
                           child: TextFormField(
+                            controller: emailController,
+                            validator: validation.emailValidator,
                             decoration: const InputDecoration(
                               hintText: 'abc@gmail.com',
                               labelText: 'Email',
@@ -45,29 +80,25 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(height: height*0.03,),
+                        SizedBox(height: height * 0.03),
                         SizedBox(
-                          width: width*0.9,
+                          width: width * 0.9,
                           child: TextFormField(
+                            controller: passwordController,
+                            validator: validation.passwordValidator,
                             obscureText: true,
                             decoration: const InputDecoration(
                               hintText: '********',
                               labelText: 'Password',
-                              border: OutlineInputBorder(
-
-                              ),
+                              border: OutlineInputBorder(),
                             ),
                           ),
                         ),
-
                       ],
-                    )
-
-                  )
+                    ),
+                  ),
                 ),
-
-                SizedBox(height: height*0.05,),
-
+                SizedBox(height: height * 0.05),
                 Row(
                   children: <Widget>[
                     Expanded(
@@ -75,32 +106,34 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 1,
                         thickness: 1,
                         color: Colors.grey,
-                        indent: width*0.06,
-                        endIndent: width*0.05,
+                        indent: width * 0.06,
+                        endIndent: width * 0.05,
                       ),
                     ),
-                    const Text('Or Login with', style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal),),
+                    const Text(
+                      'Or Login with',
+                      style: TextStyle(
+                          fontSize: 12, fontWeight: FontWeight.normal),
+                    ),
                     Expanded(
                       child: Divider(
                         height: 1,
                         thickness: 1,
                         color: Colors.grey,
-                        indent: width*0.05,
-                        endIndent: width*0.06,
+                        indent: width * 0.05,
+                        endIndent: width * 0.06,
                       ),
                     ),
                   ],
                 ),
-
-                SizedBox(height: height*0.05,),
-
+                SizedBox(height: height * 0.05),
                 SizedBox(
-                  width: width*0.92,
+                  width: width * 0.92,
                   child: OutlinedButton(
-                    onPressed: (){},
+                    onPressed: () {},
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white38,
-                      padding: EdgeInsets.symmetric(vertical: height*0.015),
+                      padding: EdgeInsets.symmetric(vertical: height * 0.015),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
@@ -108,39 +141,69 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Flexible(child: Image.asset('assets/images/googleicon.png', height: 20, width: 20,)),
-                        SizedBox(width: width*0.02,),
-                         const Text('Google', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.black),),
+                        Flexible(
+                          child: Image.asset(
+                            'assets/images/googleicon.png',
+                            height: 20,
+                            width: 20,
+                          ),
+                        ),
+                        SizedBox(width: width * 0.02),
+                        const Text(
+                          'Google',
+                          style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black),
+                        ),
                       ],
                     ),
                   ),
                 ),
-                SizedBox(height: height*0.02,),
+                SizedBox(height: height * 0.02),
                 SizedBox(
-                  width: width*0.92,
+                  width: width * 0.92,
                   child: ElevatedButton(
-                    onPressed: (){},
+                    onPressed: () {
+                      if (formKey.currentState!.validate()) {
+                        Get.to(() => const Dashboard());
+                      }
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xff2D2D2D),
-                      padding: EdgeInsets.symmetric(vertical: height*0.015),
+                      padding: EdgeInsets.symmetric(vertical: height * 0.015),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
-                    child: const Text('Login', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                    child: const Text(
+                      'Login',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
-
-                SizedBox(height: height*0.12,),
-
-                const Text("Don't have an account?", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),),
-                TextButton(onPressed: (){}, child: const Text("Create Now", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.red),)),
-
-
+                SizedBox(height: height * 0.12),
+                const Text(
+                  "Don't have an account?",
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Get.to(() => const SignUpScreen());
+                  },
+                  child: const Text(
+                    "Create Now",
+                    style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red),
+                  ),
+                ),
               ],
             ),
           ),
-        )
+        ),
       ),
     );
   }
