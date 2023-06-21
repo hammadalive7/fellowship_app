@@ -1,6 +1,7 @@
-import 'package:fellowship_app/view/login_screen.dart';
-import 'package:fellowship_app/view/step1_form_screen.dart';
-import 'package:fellowship_app/view/step1_waiting_screen.dart';
+import 'package:fellowship_app/view/Step2_waiting_screen.dart';
+import 'package:fellowship_app/view/congratulation_screen.dart';
+import 'package:fellowship_app/view/dont_stop_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,9 +16,9 @@ class MyApp extends StatelessWidget {
       title: 'Fellowship App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.purple,
+        primarySwatch: Colors.red,
       ),
-      home: const StepOneWaiting(),
+      home:  DontStop(),
     );
   }
 }

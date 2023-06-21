@@ -1,24 +1,22 @@
 import 'package:fellowship_app/constants/form_validator.dart';
-import 'package:fellowship_app/view/step1_waiting_screen.dart';
-import 'package:fellowship_app/view/step2_form_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'dashboard.dart';
 
-class StepOneForm extends StatelessWidget {
-   StepOneForm({super.key});
-  TextEditingController emailController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController rePasswordController = TextEditingController();
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+class StepTwoForm extends StatelessWidget {
+  const StepTwoForm({super.key});
 
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
     final double height = MediaQuery.of(context).size.height;
-
+    TextEditingController emailController = TextEditingController();
+    TextEditingController lastNameController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+    TextEditingController rePasswordController = TextEditingController();
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
     final FormValidation validation = Get.put(FormValidation());
 
@@ -33,7 +31,7 @@ class StepOneForm extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Step 1',
+                    'Step 2',
                     style: TextStyle(
                         fontSize: 40,
                         fontWeight: FontWeight.bold,
@@ -104,6 +102,7 @@ class StepOneForm extends StatelessWidget {
                           validator: (value) {
                             return validation.nameValidator(value);
                           },
+                          obscureText: true,
                           decoration: const InputDecoration(
                             hintText: 'xyz',
                             labelText: 'Last Name',
@@ -157,7 +156,7 @@ class StepOneForm extends StatelessWidget {
                         child: ElevatedButton(
                           onPressed: () {
                             if (formKey.currentState!.validate()) {
-                              Get.to(() => const StepOneWaiting());
+                              Get.to(() => const Dashboard());
                             }
                           },
                           style: ElevatedButton.styleFrom(
