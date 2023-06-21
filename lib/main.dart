@@ -1,4 +1,6 @@
 import 'package:fellowship_app/view/login_screen.dart';
+import 'package:fellowship_app/view/step1_form_screen.dart';
+import 'package:fellowship_app/view/step1_waiting_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      home: const LoginScreen(),
+      home: const StepOneWaiting(),
     );
   }
 }
