@@ -1,6 +1,8 @@
 import 'package:fellowship_app/view/Step2_waiting_screen.dart';
 import 'package:fellowship_app/view/congratulation_screen.dart';
 import 'package:fellowship_app/view/dont_stop_screen.dart';
+import "./view/otp_screen.dart";
+import './view/login_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home: DontStop(),
+      home: OTP_screen(),
     );
   }
 }
